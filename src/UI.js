@@ -38,6 +38,7 @@ function DOMmanager () {
             divTask.appendChild(taskLabel);
             divProject.appendChild(divTask);
             content.appendChild(divProject);
+            
         })   
     });
     
