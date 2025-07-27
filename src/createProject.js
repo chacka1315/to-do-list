@@ -1,18 +1,17 @@
 
 class Project {
-    constructor (title) {
+    constructor ( title ) {
         this.title = title;
         this.id = crypto.randomUUID();
         this.tasks = [];
     };
 
-    addTask (task) {
-        this.tasks.push(task);
+    addTask ( task ) {
+        this.tasks.push( task );
     }
 
-    deleteTask (task) {
-        const taskIndex = 1
-        this.tasks.splice()
+    deleteTask ( taskIndex ) {
+        this.tasks.splice(taskIndex, 1);
     }
 }
 

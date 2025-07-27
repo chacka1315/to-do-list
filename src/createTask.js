@@ -5,8 +5,9 @@ class Task {
         this.dueDate = dueDate;
         this.priority = priority;
         this.note = note;
-        this.id = this.id = crypto.randomUUID();
+        this.id = crypto.randomUUID();
         this.completed = false;
+        this.addDate = new Date()
     }
 
     toggleCompleteState () {

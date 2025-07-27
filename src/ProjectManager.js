@@ -1,0 +1,39 @@
+import Project from "./createProject"
+import Sorte from "./ProjectTaskSorter";
+
+class ProjectManager {
+    constructor () {
+        this.projects = [];
+    };
+
+    createProject (title) {
+        this.projects.push( new Project (title) );
+    }
+
+    addTaskToProjectbyID (projectID, task) {
+        const project = this.projects.find( item => item.id === projectID);
+        if (project) {
+            project.addTask(task);
+        };
+    };
+
+    deleteProjectTaskbyID (projectID, taskID) {
+        const project = this.projects.find( project => project.id === projectID );
+        if (project) {
+            const taskIndex = project.tasks.findIndex( task => task.id === taskID );
+            if (taskIndex) project.deleteTask(taskIndex);   
+        };
+    };
+
+    deleteProjectByID(projectID) {
+    this.projects = this.projects.filter(project => project.id !== projectID);
+    };
+
+    sorter(projectID, type) {
+        const project = this.projects.find( project => project.id === projectID );
+        if (project) Sorte.projectTaskSoter(project, type);
+    }
+}
+
+const projectManager = new ProjectManager();
+export default projectManager

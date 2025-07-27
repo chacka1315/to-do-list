@@ -1,0 +1,21 @@
+
+
+#container{
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}
+
+#sidebar{
+    display: flex;
+    flex-direction: column;
+    border: 2px solid darkcyan;
+}
+#content{
+    display: flex;
+    flex-direction: column;
+    border: 2px solid goldenrod;
+}
+
+#myProjects li::marker {
+    content: "# ";
+}
