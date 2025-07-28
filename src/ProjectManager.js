@@ -21,7 +21,7 @@ class ProjectManager {
         const project = this.projects.find( project => project.id === projectID );
         if (project) {
             const taskIndex = project.tasks.findIndex( task => task.id === taskID );
-            if (taskIndex) project.deleteTask(taskIndex);   
+            if ( taskIndex !== -1 ) project.deleteTask(taskIndex);   
         };
     };
 

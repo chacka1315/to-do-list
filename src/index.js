@@ -2,6 +2,9 @@ import "./styles.css";
 import projectManager from "./ProjectManager.js";
 import Task from "./createTask";
 import DOMManager from "./UI.js";
+import AppController from "./AppController.js";
+
+AppController();
 
 projectManager.createProject("MyProject");
 const task5 = new Task("Dont wast time", "blabla", "monday", "1", "It will be fun");
