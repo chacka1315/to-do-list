@@ -70,3 +70,8 @@ button svg{
     width: 15px;
     height: 15px;
 }
+
+#sidebar svg{
+    width: 40px;
+    height: 40px;
+}

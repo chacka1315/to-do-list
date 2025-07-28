@@ -6,11 +6,9 @@ function AppController() {
         
     content.addEventListener("click", (e) => {
         const deleteBtn = e.target.closest("button.deleteBtn");
-        console.log(e.target)
         if (deleteBtn) {
             const taskId = deleteBtn.dataset.idTask;
             const projectId = deleteBtn.dataset.idProject;
-            console.log(deleteBtn.dataset);
             projectManager.deleteProjectTaskbyID(projectId, taskId);
             DOMManager.updateContentDisplay();
         };
