@@ -1,17 +1,23 @@
 class Task {
-    constructor ( title, description, dueDate, priority, note ) {
+    constructor ( title, description, dueDate, dueTime, priority, notes ) {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
+        this.dueTime = dueTime;
         this.priority = priority;
-        this.note = note;
+        this.notes = notes;
         this.id = crypto.randomUUID();
         this.completed = false;
         this.addDate = new Date()
+        this.detailsOpen = false;
     }
 
     toggleCompleteState () {
-        this.completed = !this.completed
+        this.completed = !this.completed;
+    };
+
+    toggleDetailsOpenedState () {
+        this.detailsOpen = !this.detailsOpen;
     }
 }
 
