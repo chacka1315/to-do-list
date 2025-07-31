@@ -36,5 +36,29 @@
         </div>
     </div>
     
+    <div id="taskModal">
+        <dialog id="taskFormDialog">
+            <form>
+                <input type="text" id="title" name="task_title" placeholder="Title" required >
+                <div><textarea name="task_description" id="description" rows="2" cols="60" placeholder="Description"></textarea></div>
+                <div>
+                    <select name="due_date" id="due_date">
+                        <option value="today">Today</option>
+                        <option value="tomorrow">Tomorrow</option>
+                        <option value="other">Calendar...</option>
+                    </select>
+                    <input type="date" id="other_date" style="display: none;">
+                    <input type="time" id="due_time" required>
+                    <input type="number" id="priority"  value="1" min="1" max="3">
+                </div>
+                <textarea name="user_notes" id="notes" rows="2" cols="30" placeholder="My notes"></textarea>
+                
+                <div>
+                    <button type="button" value="cancel">Cancel</button>
+                    <button type="submit" id="confirmBtn">Add task</button>
+                </div>
+            </form>
+        </dialog>
+    </div>
 </body>
 </html>

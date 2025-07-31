@@ -1,29 +1,39 @@
-import DOMManager from "./UI";
+import DOMManager from "./DOMManager";
 import projectManager from "./ProjectManager";
+import PopUpManager from "./PopUpManager";
 
 function AppController() {
     const content = document.querySelector("#content");
     const sidebar = document.querySelector("#sidebar");
 
+    const chooseDisplayType = () => {
+        actualDisplay === "alltasks" && DOMManager.contentDisplayer.displayAllTasks();
+        actualDisplay === "todaytasks" && DOMManager.contentDisplayer.displayTodayTasks();
+        actualDisplay === "oneproject" && DOMManager.contentDisplayer.displayOneProject(projectClickedId);
+    };
+
+
     const contentEventController = () => {
         content.addEventListener("click", (e) => {
             const deleteTaskBtn = e.target.closest("button.deleteTaskBtn");
             const taskDetailsBtn = e.target.closest("button.taskDetailsBtn");
+            const addTaskBtn = e.target.closest("button.addTaskBtn");
 
             if (deleteTaskBtn) {
                 deleteTask(deleteTaskBtn);
-                actualDisplay === "alltasks" && DOMManager.contentDisplayer.displayAllTasks();
-                actualDisplay === "todaytasks" && DOMManager.displayTodayTasks();
+                chooseDisplayType();
+
 
             } else if (taskDetailsBtn) {
                 seeTaskDetails(taskDetailsBtn);  
-                actualDisplay === "alltasks" && DOMManager.contentDisplayer.displayTaskWithDetails();
-                actualDisplay === "todaytasks" && DOMManager.displayTodayTasks();
-            }
+                chooseDisplayType();
+            } 
+            PopUpManager();
         })
     };
 
     let actualDisplay = "alltasks";
+    let projectClickedId = null;
     const sidebarEventController = () => {
         sidebar.addEventListener("click", (e) =>{
             const buttonClicked = e.target;
@@ -31,10 +41,16 @@ function AppController() {
                 actualDisplay = "alltasks";
                 DOMManager.contentDisplayer.displayAllTasks();
             } else if (buttonClicked.matches("button[id=todayBtn]")) {
-                DOMManager.displayTodayTasks(); 
+                DOMManager.contentDisplayer.displayTodayTasks(); 
                 actualDisplay = "todaytasks";
+            } else if (buttonClicked.matches("#myProjects li>h2")) {
+                projectClickedId = buttonClicked.dataset.id;
+                DOMManager.contentDisplayer.displayOneProject(projectClickedId);
+                actualDisplay = "oneproject";
+                
             }
-
+            PopUpManager();
+            
         })
     }
 
@@ -54,7 +70,7 @@ function AppController() {
         })
     }
 
-    return {contentEventController, sidebarEventController}
+    return {contentEventController, sidebarEventController,chooseDisplayType}
 }
 
 const appController = AppController();

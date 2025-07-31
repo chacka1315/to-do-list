@@ -1,5 +1,5 @@
 class Task {
-    constructor ( title, description, dueDate, dueTime, priority, notes ) {
+    constructor ( title, dueTime, priority, description, notes, dueDate ) {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
@@ -8,7 +8,7 @@ class Task {
         this.notes = notes;
         this.id = crypto.randomUUID();
         this.completed = false;
-        this.addDate = new Date()
+        this.addDate = new Date();
         this.detailsOpen = false;
     }
 

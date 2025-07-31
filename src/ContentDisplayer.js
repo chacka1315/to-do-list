@@ -11,11 +11,11 @@ function ContentDisplayer() {
         const div = document.createElement("div");
         const taskCheckBox = document.createElement("input");
         taskCheckBox.type = "checkbox";
-        taskCheckBox.id = task.title;
+        taskCheckBox.id = `task-${task.id}`;
         taskCheckBox.dataset.idtask = task.id;
         taskCheckBox.dataset.idProject = project.id;
         const taskLabel = document.createElement("label");
-        taskLabel.htmlFor = task.title;
+        taskLabel.htmlFor = `task-${task.id}`;
         taskLabel.textContent = task.title;
 
         const deleteTaskBtn = document.createElement("button");
@@ -44,16 +44,17 @@ function ContentDisplayer() {
         content.appendChild(divProject); 
     }
 
+
     const generateTaskWithDetailsBlock = (divProject, project, task) => {
         const divTask = document.createElement("div");
         const div = document.createElement("div");
         const taskCheckBox = document.createElement("input");
         taskCheckBox.type = "checkbox";
-        taskCheckBox.id = task.title;
+        taskCheckBox.id = `task-${task.id}`;
         taskCheckBox.dataset.idtask = task.id;
         taskCheckBox.dataset.idProject = project.id;
         const taskLabel = document.createElement("label");
-        taskLabel.htmlFor = task.title;
+        taskLabel.htmlFor = `task-${task.id}`;
         taskLabel.textContent = task.title;
 
         const deleteTaskBtn = document.createElement("button");
@@ -114,37 +115,15 @@ function ContentDisplayer() {
     }
 
 
-    const displayAllTasks = () =>  {
-        content.textContent = "";
-        projectManager.projects.forEach( project => {
-            const divProject = document.createElement("div");
-            const projectTitle = document.createElement("h1");
-            projectTitle.textContent = project.title;
-            divProject.appendChild(projectTitle);
-
-            //if project has any tasks just display the project title with a text and the button to add another tasks
-            if (!project.tasks.length) {
-                divProject.appendChild(projectTitle);
-                const text = document.createElement("p")
-                text.textContent = "No tasks here ! Click the button bellow to add your tasks..."
-                divProject.appendChild(text);
-                content.appendChild(divProject); 
-            }
-
-            else if(project.tasks.length) {
-                project.tasks.forEach ( task => { 
-                       generateSimpleTaskBlock(divProject, project, task);
-                }); 
-            }
-            const addTaskBtn = document.createElement("button");
-            addTaskBtn.textContent = "+ Add Task";
-            divProject.appendChild(addTaskBtn);  
-        });
-        
+    const generateAddTaskBtn = (divProject, projectId) => {
+        const addTaskBtn = document.createElement("button");
+        addTaskBtn.textContent = "+ Add Task";
+        addTaskBtn.dataset.id = projectId;
+        addTaskBtn.classList.add("addTaskBtn");
+        divProject.appendChild(addTaskBtn); 
     };
 
-
-     const displayTaskWithDetails = () =>  {
+     const displayAllTasks = () =>  {
         content.textContent = "";
         projectManager.projects.forEach( project => {
             const divProject = document.createElement("div");
@@ -159,21 +138,71 @@ function ContentDisplayer() {
                 text.textContent = "No tasks here ! Click the button bellow to add your tasks..."
                 divProject.appendChild(text);
                 content.appendChild(divProject); 
-            }
-
-            else if (project.tasks.length) {
+            } else {
                 project.tasks.forEach ( task => {
                 task.detailsOpen ? generateTaskWithDetailsBlock(divProject, project, task) : generateSimpleTaskBlock(divProject,project, task);
-                })
-            }
-            const addTaskBtn = document.createElement("button");
-            addTaskBtn.textContent = "+ Add Task";
-            divProject.appendChild(addTaskBtn);  
+                });
+            };
+            generateAddTaskBtn(divProject, project.id);
         });
         
     };
 
-    return{displayAllTasks, displayTaskWithDetails}
+
+    const displayTodayTasks = () =>{
+    content.textContent = "";
+        projectManager.projects.forEach( project => {
+            const divProject = document.createElement("div");
+            const projectTitle = document.createElement("h1");
+            projectTitle.textContent = project.title;
+            divProject.appendChild(projectTitle);
+
+            //catch today tasks on an array
+            const todayTasks = project.tasks.filter(task => task.dueDate === "today" );
+            
+            //if project has any tasks just display the project title with a text and the button to add another tasks
+            if (!todayTasks.length) {
+                divProject.appendChild(projectTitle);
+                const text = document.createElement("p")
+                text.textContent = "No tasks today..."
+                divProject.appendChild(text);
+                content.appendChild(divProject); 
+            } else {
+                todayTasks.forEach ( task => {
+                task.detailsOpen ? generateTaskWithDetailsBlock(divProject, project, task) : generateSimpleTaskBlock(divProject,project, task);
+                });
+            };
+            generateAddTaskBtn(divProject, project.id);    
+        });
+    }
+
+    const displayOneProject = (projectId) => {
+        content.textContent = "";
+        const projectClicked = projectManager.projects.find( project => project.id === projectId);
+        if (projectClicked){
+            const divProject = document.createElement("div");
+            const projectTitle = document.createElement("h1");
+            projectTitle.textContent = projectClicked.title;
+            divProject.appendChild(projectTitle);
+
+            if (!projectClicked.tasks.length) {
+                divProject.appendChild(projectTitle);
+                const text = document.createElement("p")
+                text.textContent = "No tasks here ! Click the button bellow to add your tasks..."
+                divProject.appendChild(text);
+                content.appendChild(divProject); 
+            } else {
+                projectClicked.tasks.forEach ( task => {
+                task.detailsOpen ? generateTaskWithDetailsBlock(divProject, projectClicked, task) : generateSimpleTaskBlock(divProject,projectClicked, task);
+                });
+            };
+            generateAddTaskBtn(divProject, projectId); 
+        }
+    
+
+    }
+
+    return{displayAllTasks, displayTodayTasks, displayOneProject}
 }
 
 const contentDisplayer = ContentDisplayer();
