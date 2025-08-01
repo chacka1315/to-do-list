@@ -7,13 +7,22 @@ class Task {
         this.priority = priority;
         this.notes = notes;
         this.id = crypto.randomUUID();
-        this.completed = false;
-        this.addDate = new Date();
+        this.completedState = false;
+        this.addDate = new Date().toISOString().split("T")[0];
         this.detailsOpen = false;
     }
 
+    set setTaskInfos (obj) {
+        this.title = obj.title;
+        this.description = obj.description;
+        this.dueDate = obj.dueDate;
+        this.dueTime = obj.dueTime;
+        this.priority = obj.priority;
+        this.notes = obj.notes;
+    };
+
     toggleCompleteState () {
-        this.completed = !this.completed;
+        this.completedState = !this.completedState;
     };
 
     toggleDetailsOpenedState () {

@@ -1,6 +1,10 @@
 import projectManager from "./ProjectManager";
 import trashIcon from "./assets/trash-svg.inline.svg";
-import detailsIcon from "./assets/chevron-down.inline.svg"
+import detailsIcon from "./assets/chevron-down.inline.svg";
+import watchIcon from "./assets/clock.inline.svg";
+import detailsIcon2 from "./assets/chevron-up.inline.svg";
+import dateFormater from "./DateFormater";
+import { format, isToday } from "date-fns";
 
 function ContentDisplayer() {
 
@@ -12,11 +16,12 @@ function ContentDisplayer() {
         const taskCheckBox = document.createElement("input");
         taskCheckBox.type = "checkbox";
         taskCheckBox.id = `task-${task.id}`;
-        taskCheckBox.dataset.idtask = task.id;
+        taskCheckBox.dataset.idTask = task.id;
         taskCheckBox.dataset.idProject = project.id;
         const taskLabel = document.createElement("label");
         taskLabel.htmlFor = `task-${task.id}`;
         taskLabel.textContent = task.title;
+        addStyleOnCompletedTask(task.completedState, taskCheckBox, taskLabel);
 
         const deleteTaskBtn = document.createElement("button");
         deleteTaskBtn.classList.add("deleteTaskBtn");
@@ -31,7 +36,21 @@ function ContentDisplayer() {
         taskDetailsBtn.innerHTML = detailsIcon;
 
         const dueDatePara = document.createElement("p");
-        dueDatePara.textContent = task.dueDate;
+        const dueDateDaySpan = document.createElement("span");
+        const dueDateTimeSpan = document.createElement("span");
+        const timeSpan = document.createElement("span");
+        const watchIconSpan = document.createElement("span")
+        watchIconSpan.innerHTML = watchIcon;
+ 
+        dueDateDaySpan.textContent = dateFormater.formateDate(task.dueDate);
+        timeSpan.textContent = dateFormater.formateTime(task.dueDate);
+        dueDateTimeSpan.appendChild(watchIconSpan);
+        dueDateTimeSpan.appendChild(timeSpan);
+        dueDatePara.appendChild(dueDateDaySpan);
+        dueDatePara.appendChild(dueDateTimeSpan);
+        dueDatePara.classList.add("dueDate1");
+        divTask.classList.add("divTask1")
+        
 
         div.appendChild(taskCheckBox);
         div.appendChild(taskLabel);
@@ -51,12 +70,12 @@ function ContentDisplayer() {
         const taskCheckBox = document.createElement("input");
         taskCheckBox.type = "checkbox";
         taskCheckBox.id = `task-${task.id}`;
-        taskCheckBox.dataset.idtask = task.id;
+        taskCheckBox.dataset.idTask = task.id;
         taskCheckBox.dataset.idProject = project.id;
         const taskLabel = document.createElement("label");
         taskLabel.htmlFor = `task-${task.id}`;
         taskLabel.textContent = task.title;
-
+        addStyleOnCompletedTask(task.completedState, taskCheckBox, taskLabel);
         const deleteTaskBtn = document.createElement("button");
         deleteTaskBtn.classList.add("deleteTaskBtn");
         deleteTaskBtn.dataset.idTask = task.id;
@@ -67,32 +86,42 @@ function ContentDisplayer() {
         taskDetailsBtn.classList.add("taskDetailsBtn");
         taskDetailsBtn.dataset.idTask = task.id;
         taskDetailsBtn.dataset.idProject = project.id;
-        taskDetailsBtn.innerHTML = detailsIcon;
+        taskDetailsBtn.innerHTML = detailsIcon2;
 
-        const divDescription = document.createElement("div");
-        divDescription.textContent = task.description;
+        const paraDescription = document.createElement("p");
+        paraDescription.textContent = task.description;
+        paraDescription.classList.add("description");
 
         const dueDateSpan = document.createElement("span");
-        dueDateSpan.textContent = task.dueDate;
+        dueDateSpan.textContent = dateFormater.formateDate(task.dueDate);
+        dueDateSpan.classList.add("dueDate2");
 
         const dueTimeSpan = document.createElement("span");
-        dueTimeSpan.textContent = task.dueTime;
+        dueTimeSpan.textContent = dateFormater.formateTime(task.dueDate);;
+        dueTimeSpan.classList.add("dueTime2");
 
         const prioritySpan = document.createElement("span");
-        prioritySpan.textContent = `priority : ${task.priority}`;
+        prioritySpan.textContent = priorityObj[task.priority][0];
+        prioritySpan.style.color = priorityObj[task.priority][1];
+        prioritySpan.classList.add("priority");
 
-        const divAddDate = document.createElement("div");
-        divAddDate.textContent = task.addDate;
+        const paraAddDate = document.createElement("p");
+        paraAddDate.textContent = ` Added on ${task.addDate}`;
+        paraAddDate.classList.add("addDate");
 
-        const divNotes = document.createElement("div");
+        const paraNotes = document.createElement("p");
+        paraNotes.classList.add("notes")
         const notesSpan = document.createElement("span");
         notesSpan.textContent = "Notes : ";
         const userNotes = document.createElement("span");
         userNotes.textContent = task.notes;
-        divNotes.appendChild(notesSpan);
-        divNotes.appendChild(userNotes);
+        paraNotes.appendChild(notesSpan);
+        paraNotes.appendChild(userNotes);
 
         const editTaskBtn = document.createElement("button");
+        editTaskBtn.dataset.idTask = task.id;
+        editTaskBtn.dataset.idProject = project.id;
+        editTaskBtn.classList.add("editTaskBtn");
         editTaskBtn.textContent = "Edit";
 
 
@@ -102,13 +131,14 @@ function ContentDisplayer() {
         div.appendChild(deleteTaskBtn);
 
         
+        divTask.classList.add("divTask2");
         divTask.appendChild(div);
-        divTask.appendChild(divDescription);
+        divTask.appendChild(paraDescription);
         divTask.appendChild(dueDateSpan);
         divTask.appendChild(dueTimeSpan);
         divTask.appendChild(prioritySpan);
-        divTask.appendChild(divAddDate);
-        divTask.appendChild(divNotes);
+        divTask.appendChild(paraAddDate);
+        divTask.appendChild(paraNotes);
         divTask.appendChild(editTaskBtn);
         divProject.appendChild(divTask);
         content.appendChild(divProject); 
@@ -123,8 +153,40 @@ function ContentDisplayer() {
         divProject.appendChild(addTaskBtn); 
     };
 
+    const generateAnyProjectText = () => {
+        const text = document.createElement("p");
+        text.textContent = "You don't have any project for the momnent...";
+        text.style.fontStyle = "italic";
+        text.style.color = "gray";
+        text.style.fontSize = "16px";
+        content.appendChild(text);
+    };
+
+    const priorityObj = {
+        1 : ["Critical", "red"],
+        2 : ["High", "orange"],
+        3 : ["Medium", "blue"],
+        4 : ["Low", "black"],
+    };
+
+
+    const addStyleOnCompletedTask = (isCompleted, checkbox, label) => {
+        if (isCompleted) {
+            checkbox.checked = true;
+            label.classList.add("completedTaskStyle");
+        } else{
+            checkbox.checked = false;
+            label.classList.remove("completedTaskStyle");
+        }
+        
+    };
+
      const displayAllTasks = () =>  {
         content.textContent = "";
+        const displayTitle = document.createElement("h2");
+        displayTitle.textContent = "All current Projects";
+        content.appendChild(displayTitle);
+        !projectManager.projects.length ? generateAnyProjectText() :
         projectManager.projects.forEach( project => {
             const divProject = document.createElement("div");
             const projectTitle = document.createElement("h1");
@@ -136,6 +198,9 @@ function ContentDisplayer() {
                 divProject.appendChild(projectTitle);
                 const text = document.createElement("p")
                 text.textContent = "No tasks here ! Click the button bellow to add your tasks..."
+                text.style.fontStyle = "italic";
+                text.style.color = "gray"
+                text.style.fontSize = "13px";
                 divProject.appendChild(text);
                 content.appendChild(divProject); 
             } else {
@@ -151,6 +216,10 @@ function ContentDisplayer() {
 
     const displayTodayTasks = () =>{
     content.textContent = "";
+        const displayTitle = document.createElement("h2");
+        displayTitle.textContent = "Today";
+        content.appendChild(displayTitle);
+        !projectManager.projects.length ? generateAnyProjectText() :
         projectManager.projects.forEach( project => {
             const divProject = document.createElement("div");
             const projectTitle = document.createElement("h1");
@@ -158,13 +227,16 @@ function ContentDisplayer() {
             divProject.appendChild(projectTitle);
 
             //catch today tasks on an array
-            const todayTasks = project.tasks.filter(task => task.dueDate === "today" );
+            const todayTasks = project.tasks.filter(task => isToday(task.dueDate));
             
             //if project has any tasks just display the project title with a text and the button to add another tasks
             if (!todayTasks.length) {
                 divProject.appendChild(projectTitle);
                 const text = document.createElement("p")
                 text.textContent = "No tasks today..."
+                text.style.fontStyle = "italic";
+                text.style.color = "gray"
+                text.style.fontSize = "13px";
                 divProject.appendChild(text);
                 content.appendChild(divProject); 
             } else {
@@ -189,6 +261,7 @@ function ContentDisplayer() {
                 divProject.appendChild(projectTitle);
                 const text = document.createElement("p")
                 text.textContent = "No tasks here ! Click the button bellow to add your tasks..."
+                text.style.fontSize = "13px";
                 divProject.appendChild(text);
                 content.appendChild(divProject); 
             } else {

@@ -4,18 +4,37 @@ import projectManager from "./ProjectManager";
 function SidebarDisplayer () {
     const myProjects = document.querySelector("#myProjects");
     const projectList = myProjects.querySelector("ul");
+
+    const colorHashSymbol = () => {
+        const r = Math.floor(Math.random()*256 );
+        const g = Math.floor(Math.random()*256 );
+        const b = Math.floor(Math.random()*256 );
+        return `rgb(${r} ${b} ${g})`
+    }
+
     const updateSidebar = () =>  {
         projectList.textContent = "";
         projectManager.projects.forEach( project => {
             const projectLine = document.createElement("li");
             const projectTitle = document.createElement("h2")
+            const hashSpan = document.createElement("span");
+            hashSpan.textContent = "#"
+            hashSpan.style.color = colorHashSymbol();
+            hashSpan.style.fontWeight = "bolder";
+            hashSpan.style.fontSize = "2rem"
             projectTitle.dataset.id = project.id;
             projectTitle.textContent = project.title;
-            const trashSpan = document.createElement("span")
+
+            const trashSpan = document.createElement("span");
+            trashSpan.dataset.id = project.id;
+            trashSpan.classList.add("deleteProjectBtn");
             trashSpan.innerHTML = trashIcon;
-            const editSpan = document.createElement("span")
+            const editSpan = document.createElement("span");
+            editSpan.dataset.id = project.id;
+            editSpan.classList.add("editProjectBtn");
             editSpan.innerHTML = editProjectIcon;
 
+            projectLine.appendChild(hashSpan)
             projectLine.appendChild(projectTitle);
             projectLine.appendChild(editSpan);
             projectLine.appendChild(trashSpan);

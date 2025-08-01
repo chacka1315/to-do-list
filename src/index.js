@@ -10,34 +10,27 @@ appController.sidebarEventController();
 
 
 projectManager.createProject("MyProject");
-const task5 = new Task("Dont wast time", "6 : 00", "1","blabla", "It will be fun", "monday" );
-const task6 = new Task("Dont wast time", "6 : 00", "3","blabla", "It will be fun", "today" );
-const task7 = new Task("Dont wast time", "6 : 00", "1","blabla", "It will be fun", "tomorrow" );
-const task8 = new Task("Dont wast time", "6 : 00", "2","blabla", "It will be fun", "monday" );
+const task5 = new Task("Dont wast time bro", "07:00", "1","blablabbbbbbbbbbbbbbbb", "It will be fun", `${new Date()}`);
+const task6 = new Task("Go to gym", "17:00", "3","blabla", "It will be fun", `${new Date()}`);
+const task7 = new Task("Dont wast time", "05:30", "1","blabla", "It will be fun", `${new Date()}`);
+const task8 = new Task("Be yourself", "16:00", "2","blabla", "It will be fun", `${new Date()}`);
 projectManager.addTaskToProjectbyID(projectManager.projects[0].id, task5)
 projectManager.addTaskToProjectbyID(projectManager.projects[0].id, task6)
 projectManager.addTaskToProjectbyID(projectManager.projects[0].id, task7)
 projectManager.addTaskToProjectbyID(projectManager.projects[0].id, task8)
 
 
-projectManager.createProject("Be a billionaire");
-const task1 = new Task("Dont wast time", "6 : 00", "1","blabla", "It will be fun", "monday" );
-const task2 = new Task("Dont wast time", "6 : 00", "2","blabla", "It will be fun", "today" );
-const task3 = new Task("Dont wast time", "6 : 00", "3","blabla", "It will be fun", "monday" );
-const task4 = new Task("Dont wast time", "6 : 00", "1","blabla", "It will be fun", "monday" );
+projectManager.createProject("Do some stuff");
+const task1 = new Task("Dont wast time", "18:00", "1","blabla", "It will be fun", `${new Date()}`);
+const task2 = new Task("Workout", "06:00", "2","blabla", "It will be fun", `${new Date()}`);
+const task3 = new Task("Dont wast time", "06:00", "3","blabla", "It will be fun", `${new Date()}`);
+const task4 = new Task("Push up", "20:00", "1","blabla", "It will be fun", `${new Date()}` );
 projectManager.addTaskToProjectbyID(projectManager.projects[1].id, task1)
 projectManager.addTaskToProjectbyID(projectManager.projects[1].id, task2)
 projectManager.addTaskToProjectbyID(projectManager.projects[1].id, task3)
 projectManager.addTaskToProjectbyID(projectManager.projects[1].id, task4)
 
 
-console.log(projectManager)
-
-
-task3.toggleCompleteState()
-task1.toggleCompleteState()
-task6.toggleCompleteState()
-task8.toggleCompleteState()
 
 projectManager.sorter(projectManager.projects[1].id, "priority");
 projectManager.sorter(projectManager.projects[0].id, "title");

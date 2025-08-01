@@ -10,6 +10,13 @@ class ProjectManager {
         this.projects.push( new Project (title) );
     }
 
+    editProjectTitle (projectID, newTitle) {
+        const project = this.projects.find( item => item.id === projectID);
+        if (project) {
+            project.title = newTitle;
+        };
+    };
+
     addTaskToProjectbyID (projectID, task) {
         const project = this.projects.find( item => item.id === projectID);
         if (project) {
@@ -32,6 +39,16 @@ class ProjectManager {
     sorter(projectID, type) {
         const project = this.projects.find( project => project.id === projectID );
         if (project) Sorte.projectTaskSoter(project, type);
+    };
+
+    toggleCompletedTask = (projectId, taskId) => {
+        const project = this.projects.find( project => project.id === projectId );
+        if (project) {
+            const task = project.tasks.find( task => task.id === taskId );
+            if (task) {
+                task.toggleCompleteState();
+            }
+        };
     }
 }
 

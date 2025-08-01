@@ -1,6 +1,5 @@
 import DOMManager from "./DOMManager";
 import projectManager from "./ProjectManager";
-import PopUpManager from "./PopUpManager";
 
 function AppController() {
     const content = document.querySelector("#content");
@@ -17,7 +16,7 @@ function AppController() {
         content.addEventListener("click", (e) => {
             const deleteTaskBtn = e.target.closest("button.deleteTaskBtn");
             const taskDetailsBtn = e.target.closest("button.taskDetailsBtn");
-            const addTaskBtn = e.target.closest("button.addTaskBtn");
+            const inputCheckbox = e.target.closest("input");
 
             if (deleteTaskBtn) {
                 deleteTask(deleteTaskBtn);
@@ -27,8 +26,12 @@ function AppController() {
             } else if (taskDetailsBtn) {
                 seeTaskDetails(taskDetailsBtn);  
                 chooseDisplayType();
-            } 
-            PopUpManager();
+            } else if (inputCheckbox) {
+                const taskId = inputCheckbox.dataset.idTask;
+                const projectId = inputCheckbox.dataset.idProject;
+                projectManager.toggleCompletedTask(projectId, taskId);
+                chooseDisplayType();
+            }
         })
     };
 
@@ -37,20 +40,27 @@ function AppController() {
     const sidebarEventController = () => {
         sidebar.addEventListener("click", (e) =>{
             const buttonClicked = e.target;
+            const deleteProjectBtn = e.target.closest("span.deleteProjectBtn"); //to chatch delete button cause they have svg inside
+
             if (buttonClicked.matches("button[id=seeAllBtn]")) {
                 actualDisplay = "alltasks";
                 DOMManager.contentDisplayer.displayAllTasks();
+
             } else if (buttonClicked.matches("button[id=todayBtn]")) {
                 DOMManager.contentDisplayer.displayTodayTasks(); 
                 actualDisplay = "todaytasks";
+
             } else if (buttonClicked.matches("#myProjects li>h2")) {
                 projectClickedId = buttonClicked.dataset.id;
                 DOMManager.contentDisplayer.displayOneProject(projectClickedId);
-                actualDisplay = "oneproject";
-                
-            }
-            PopUpManager();
-            
+                actualDisplay = "oneproject"; 
+
+            } else if (deleteProjectBtn) {
+                const projectToDeleteId = deleteProjectBtn.dataset.id;
+                projectManager.deleteProjectByID(projectToDeleteId);
+                DOMManager.sidebarDisplayer.updateSidebar();
+                chooseDisplayType();  
+            }    
         })
     }
 
