@@ -50,7 +50,6 @@ function StorageManager() {
         projectManager.addTaskToProjectbyID(projectManager.projects[0].id, task2);
         projectManager.addTaskToProjectbyID(projectManager.projects[0].id, task3);
         projectManager.addTaskToProjectbyID(projectManager.projects[0].id, task4);
-        projectManager.sorter(projectManager.projects[0].id, "priority");   
     };
 
  
