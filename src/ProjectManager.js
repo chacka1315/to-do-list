@@ -6,6 +6,10 @@ class ProjectManager {
         this.projects = [];
     };
 
+    set projectsTab (newProjects) {
+        this.projects = newProjects
+    } 
+
     createProject (title) {
         this.projects.push( new Project (title) );
     }
@@ -53,4 +57,4 @@ class ProjectManager {
 }
 
 const projectManager = new ProjectManager();
-export default projectManager
+export default projectManager;

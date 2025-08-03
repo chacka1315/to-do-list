@@ -2,6 +2,7 @@ import projectManager from "./ProjectManager";
 import appController from "./AppController";
 import DOMManager from "./DOMManager";
 import Task from "./createTask";
+import storageManager from "./StorageManager";
 
 function PopUpManager() {
     const content = document.querySelector("#content");
@@ -100,7 +101,8 @@ function PopUpManager() {
             taskToEdit.setTaskInfos = obj;
             taskFormDialog.close();
             appController.chooseDisplayType();
-        }
+        };
+        storageManager.updateStorage();
     })
     
 
@@ -172,6 +174,7 @@ function PopUpManager() {
             appController.chooseDisplayType();
             projectDialog.close();
         }
+        storageManager.updateStorage();
     });
 
 

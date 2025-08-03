@@ -1,5 +1,6 @@
 import DOMManager from "./DOMManager";
 import projectManager from "./ProjectManager";
+import storageManager from "./StorageManager";
 
 function AppController() {
     const content = document.querySelector("#content");
@@ -22,7 +23,6 @@ function AppController() {
                 deleteTask(deleteTaskBtn);
                 chooseDisplayType();
 
-
             } else if (taskDetailsBtn) {
                 seeTaskDetails(taskDetailsBtn);  
                 chooseDisplayType();
@@ -31,7 +31,8 @@ function AppController() {
                 const projectId = inputCheckbox.dataset.idProject;
                 projectManager.toggleCompletedTask(projectId, taskId);
                 chooseDisplayType();
-            }
+            };
+            storageManager.updateStorage();
         })
     };
 
@@ -59,7 +60,8 @@ function AppController() {
                 const projectToDeleteId = deleteProjectBtn.dataset.id;
                 projectManager.deleteProjectByID(projectToDeleteId);
                 DOMManager.sidebarDisplayer.updateSidebar();
-                chooseDisplayType();  
+                chooseDisplayType();
+                storageManager.updateStorage();
             }    
         })
     }

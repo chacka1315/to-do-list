@@ -27,7 +27,13 @@ class Task {
 
     toggleDetailsOpenedState () {
         this.detailsOpen = !this.detailsOpen;
-    }
+    };
+
+    static restoreTaskMethods (JSONtask) {
+        const task = Object.assign(new Task, JSONtask);
+        return task
+    };
 }
+
 
 export default Task

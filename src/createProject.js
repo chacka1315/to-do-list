@@ -13,6 +13,11 @@ class Project {
     deleteTask ( taskIndex ) {
         this.tasks.splice(taskIndex, 1);
     }
+
+    static restoreProjectMethods (JSONproject) {
+    const project = Object.assign(new Project, JSONproject);
+    return project;
+    };
 }
 
 export default Project
