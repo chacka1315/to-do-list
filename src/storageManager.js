@@ -1,4 +1,4 @@
-import projectManager from "./ProjectManager";
+import projectManager from "./projectManager";
 import Task from "./createTask";
 import Project from "./createProject";
 

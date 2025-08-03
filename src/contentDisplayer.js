@@ -1,10 +1,10 @@
-import projectManager from "./ProjectManager";
+import projectManager from "./projectManager";
 import trashIcon from "./assets/trash-svg.inline.svg";
 import detailsIcon from "./assets/chevron-down.inline.svg";
 import watchIcon from "./assets/clock.inline.svg";
 import detailsIcon2 from "./assets/chevron-up.inline.svg";
-import dateFormater from "./DateFormater";
-import { format, isToday } from "date-fns";
+import dateFormater from "./dateFormater";
+import { isToday } from "date-fns";
 
 function ContentDisplayer() {
 
@@ -146,11 +146,15 @@ function ContentDisplayer() {
 
 
     const generateAddTaskBtn = (divProject, projectId) => {
-        const addTaskBtn = document.createElement("button");
-        addTaskBtn.textContent = "+ Add Task";
-        addTaskBtn.dataset.id = projectId;
-        addTaskBtn.classList.add("addTaskBtn");
-        divProject.appendChild(addTaskBtn); 
+        if(projectId === projectManager.projects[0].id) { // we don't want to add a add task button bellow for the general tasks
+            return;
+        } else{
+            const addTaskBtn = document.createElement("button");
+            addTaskBtn.textContent = "+ Add Task";
+            addTaskBtn.dataset.id = projectId;
+            addTaskBtn.classList.add("addTaskBtn");
+            divProject.appendChild(addTaskBtn); 
+        }
     };
 
     const generateAnyProjectText = () => {
@@ -184,7 +188,7 @@ function ContentDisplayer() {
      const displayAllTasks = () =>  {
         content.textContent = "";
         const displayTitle = document.createElement("h2");
-        displayTitle.textContent = "All current Projects";
+        displayTitle.textContent = "All current tasks";
         content.appendChild(displayTitle);
         !projectManager.projects.length ? generateAnyProjectText() :
         projectManager.projects.forEach( project => {

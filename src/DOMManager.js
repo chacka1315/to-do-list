@@ -1,5 +1,5 @@
-import sidebarDisplayer from "./SidebarDisplayer";
-import contentDisplayer from "./ContentDisplayer";
+import sidebarDisplayer from "./sidebarDisplayer";
+import contentDisplayer from "./contentDisplayer";
 
 function DOMmanager () {
 

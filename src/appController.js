@@ -1,7 +1,7 @@
-import Task from "./createTask";
 import DOMManager from "./DOMManager";
-import projectManager from "./ProjectManager";
-import storageManager from "./StorageManager";
+import projectManager from "./projectManager";
+import storageManager from "./storageManager";
+import Sorte from "./projectTaskSorter";
 
 function AppController() {
     const content = document.querySelector("#content");
@@ -44,7 +44,12 @@ function AppController() {
             const buttonClicked = e.target;
             const deleteProjectBtn = e.target.closest("span.deleteProjectBtn"); //to chatch delete button cause they have svg inside
 
-            if (buttonClicked.matches("button[id=seeAllBtn]")) {
+            if (buttonClicked.matches("button#generalTask")) {
+                projectClickedId = projectManager.projects[0].id;
+                DOMManager.contentDisplayer.displayOneProject(projectClickedId);
+                actualDisplay = "oneproject";
+
+            }else if (buttonClicked.matches("button[id=seeAllBtn]")) {
                 actualDisplay = "alltasks";
                 DOMManager.contentDisplayer.displayAllTasks();
 
@@ -78,8 +83,15 @@ function AppController() {
         projectManager.projects.forEach( project => {
             const task = project.tasks.find( task => task.id === taskId);
             if (task) task.toggleDetailsOpenedState();
-        })
-    }
+        });
+    };
+
+    const sorterSelect = document.querySelector("#sort");
+    sorterSelect.addEventListener("change", () =>{
+       const sortType = sorterSelect.value;
+       Sorte.projectTaskSoter(sortType);
+       chooseDisplayType();
+    });
 
     return {contentEventController, sidebarEventController,chooseDisplayType}
 }

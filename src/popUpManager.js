@@ -1,10 +1,10 @@
-import projectManager from "./ProjectManager";
-import appController from "./AppController";
+import projectManager from "./projectManager";
+import appController from "./appController";
 import DOMManager from "./DOMManager";
 import Task from "./createTask";
-import storageManager from "./StorageManager";
+import storageManager from "./storageManager";
 
-function PopUpManager() {
+function popUpManager() {
     const content = document.querySelector("#content");
     const taskFormDialog = document.querySelector("#taskFormDialog");
     const confirmBtn = document.querySelector("#confirmBtn");
@@ -137,7 +137,8 @@ function PopUpManager() {
     let projectToEditId = null;
     sidebar.addEventListener("click", (e) => {
         const editProjectBtn = e.target.closest("span.editProjectBtn"); //to chatch edit button cause they have svg inside
-        if (e.target.matches("button#addProject")) {
+        const addProjectBtn = e.target.closest("#addProject"); //to chatch add project svg click
+        if (addProjectBtn) {
             projectDialog.showModal();
             projectTitleInput.value = "";
             confirmProjectMode = "add";
@@ -188,4 +189,4 @@ function PopUpManager() {
 }
 
 
-export default PopUpManager;
+export default popUpManager;

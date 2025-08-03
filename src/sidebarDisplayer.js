@@ -1,6 +1,6 @@
 import trashIcon from "./assets/trash-svg.inline.svg";
 import editProjectIcon from "./assets/projectEdit.inline.svg";
-import projectManager from "./ProjectManager";
+import projectManager from "./projectManager";
 function SidebarDisplayer () {
     const myProjects = document.querySelector("#myProjects");
     const projectList = myProjects.querySelector("ul");

@@ -83,30 +83,43 @@ body{
     align-items: center;
 }
 
+#sidebar > div:first-child  select{
+    border: none;
+    color: var(--forth-color);
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+}
+
+#sidebar > div:first-child  select:focus{
+    outline: none;
+}
+
+
 #sidebar #profilePic{
-  padding-top: 20px;
   align-self: self-start;
 }
 
 #profilePic .picture{
-  background-color: var(--forth-color);
   width: 35px;
   height: 35px;
   border-radius: 25px;
   margin-right: 5px;
-  text-align: center;
-  color: #ffffff;
+}
+
+#profilePic {
+  font-weight: 900;
+  color: var(--forth-color);
+  font-size: 2.5rem;
 }
 
 #projectPic .picture{
-  background-color: var(--forth-color);
   width: 30px;
   height: 30px;
   border-radius: 5px;
   margin-right: 5px;
-  text-align: center;
-  color: #ffffff;
 }
+
 #sidebar > div:first-child  svg{
   width: 25px;
   height: 25px;
@@ -129,7 +142,7 @@ body{
   grid-template-columns: 25px 1fr 25px 50px;
   font-size: 0.7rem;
   align-items: center;
-  margin-left: -5px;
+  margin-left: -30px;
 }
 
 #myProjects li h2{
@@ -164,23 +177,16 @@ body{
 #addProject{
   margin-top: 10px;
   margin-left: 50px;
-  font-size: 2rem;
-  font-weight: 900;
-  background-color: var(--tertiary-color);
-  color: var(--secondary-color);
+  fill: var(--tertiary-color);
   border: none;
   width: 40px;
   height: 40px;
-  border-radius: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
   transition: transform 0.3s ease;
-  user-select: none;
+  cursor: pointer;
 }
 
 #addProject:hover{
-  background-color: rgba(25, 157, 228, 0.8);
+  fill: rgba(25, 157, 228, 0.8);
 }
 
 #addProject:active{
@@ -189,7 +195,7 @@ body{
 
 
 
-
+/* content styling */
 #content{
     display: flex;
     flex-direction: column;
@@ -395,4 +401,162 @@ button svg{
 
 .completedTaskStyle{
   color: var(--tertiary-color);
+}
+
+
+/* add task modal styling */
+#taskFormDialog{
+justify-self: center;
+align-self: center;
+width: clamp(200px, 45%, 600px);
+border: var(--tertiary-color) 1px solid;
+border-radius: 10px;
+}
+
+#taskFormDialog form{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+#taskFormDialog input#title{
+  height: 30px;
+  border: none;
+  border-bottom: var(--tertiary-color) 1px solid;
+}
+
+#taskFormDialog input#title:focus{
+  outline: none;
+  border-bottom: var(--forth-color) 1px solid;
+}
+
+#taskFormDialog textarea{
+  border: var(--tertiary-color) 1px solid;
+  border-radius: 10px;
+  padding-left: 5px;
+  width: 90%;
+}
+#taskFormDialog textarea:focus{
+  outline: none;
+  border: var(--forth-color) 1px solid;
+}
+
+#taskFormDialog select{
+  border: none;
+  color: var(--forth-color);
+  margin-right: 10px;
+  font-weight: 600;
+}
+
+#taskFormDialog select:focus{
+  outline: none
+}
+
+#taskFormDialog select option{
+  font-size: 16px;
+  font-weight: 500;
+  color: black;
+}
+
+#taskFormDialog input#due_time{
+  color: var(--forth-color);
+  font-size: 16px;
+  font-weight: 500;
+  border: var(--tertiary-color) 1px solid;
+  border-radius: 10px;
+  padding-left: 5px;
+}
+
+#taskFormDialog input#other_date{
+  color: var(--forth-color);
+  font-size: 16px;
+  font-weight: 500;
+  border: var(--tertiary-color) 1px solid;
+  border-radius: 10px;
+  padding-left: 5px;
+  width: 120px;
+}
+#taskFormDialog input#due_time:focus{
+  outline: none;
+  border: var(--forth-color) 2px solid;
+}
+
+#taskFormDialog input#priority{
+  color: var(--forth-color);
+  font-size: 20px;
+  font-weight: 500;
+  border: none;
+  border-radius: 10px;
+  padding-left: 10px;
+  height: 15%;
+}
+
+#taskFormDialog input#priority::placeholder{
+  font-size: 16px;
+  font-weight: 400;
+  color: rgb(182, 179, 179);
+}
+#taskFormDialog input#priority:focus{
+  outline: none;
+  border: var(--forth-color) 2px solid;
+}
+
+#taskFormDialog form div:last-child{
+  display: flex;
+  justify-content: space-around;
+}
+#taskFormDialog button{
+  color: var(--secondary-color);
+  font-weight: 600;
+  background-color: var(--forth-color);
+  border: none;
+  border-radius: 10px;
+  box-shadow: 2px 2px 4px rgb(218, 212, 212);
+  transition: transform 0.3s ease;
+}
+
+#taskFormDialog button:active{
+  transform: scale(0.95);
+    box-shadow: 1px 1px 2px rgb(218, 212, 212);
+}
+
+/* add project modal styling */
+#projectFormDialog{
+  position: fixed;
+  top: 25%;
+  width: 23%;
+  border: var(--tertiary-color) 1px solid;
+  border-radius: 10px;
+  margin-left: 10px;
+}
+
+#projectFormDialog form{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#projectFormDialog button{
+  color: var(--secondary-color);
+  font-weight: 600;
+  background-color: var(--forth-color);
+  border: none;
+  border-radius: 10px;
+  box-shadow: 2px 2px 4px rgb(218, 212, 212);
+  transition: transform 0.3s ease;
+}
+
+#projectFormDialog button:active{
+  transform: scale(0.95);
+  box-shadow: 1px 1px 2px rgb(218, 212, 212);
+}
+
+#projectFormDialog input{
+  border: none;
+  border-bottom: 1px solid var(--tertiary-color);
+}
+
+#projectFormDialog input:focus{
+  outline: none;
+  border-bottom: 2px solid var(--forth-color);
 }

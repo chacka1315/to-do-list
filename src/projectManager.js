@@ -1,6 +1,4 @@
 import Project from "./createProject"
-import Sorte from "./ProjectTaskSorter";
-import Task from "./createTask";
 
 class ProjectManager {
     constructor () {
@@ -39,11 +37,6 @@ class ProjectManager {
 
     deleteProjectByID(projectID) {
     this.projects = this.projects.filter(project => project.id !== projectID);
-    };
-
-    sorter(projectID, type) {
-        const project = this.projects.find( project => project.id === projectID );
-        if (project) Sorte.projectTaskSoter(project, type);
     };
 
     toggleCompletedTask = (projectId, taskId) => {
