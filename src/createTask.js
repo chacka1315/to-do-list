@@ -30,7 +30,7 @@ class Task {
     };
 
     static restoreTaskMethods (JSONtask) {
-        const task = Object.assign(new Task, JSONtask);
+        const task = Object.assign(new Task(), JSONtask);
         return task
     };
 }

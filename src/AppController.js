@@ -1,3 +1,4 @@
+import Task from "./createTask";
 import DOMManager from "./DOMManager";
 import projectManager from "./ProjectManager";
 import storageManager from "./StorageManager";
@@ -65,8 +66,6 @@ function AppController() {
             }    
         })
     }
-
-
 
     const deleteTask = (deleteBtn) => {
         const taskId = deleteBtn.dataset.idTask;

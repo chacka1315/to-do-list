@@ -1,5 +1,6 @@
 import Project from "./createProject"
 import Sorte from "./ProjectTaskSorter";
+import Task from "./createTask";
 
 class ProjectManager {
     constructor () {

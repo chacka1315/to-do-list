@@ -67,28 +67,53 @@ body{
     height: 100vh;
     position: sticky;
     top: 0;
-}
-
-#sidebar > div:first-child,
-#sidebar > div:nth-child(2){
-    display: flex;
-    padding-left: 40px;
-    font-size: 1.3rem;
-    align-items: center;
-    font-weight: 600;
+    overflow:auto;
+    padding-left: 30px;
 }
 
 #sidebar > div:first-child{
-  padding-top: 30px;
+    display: grid;
+    grid-template-rows: 80px repeat(4, 40px);
+    font-size: 1rem;
+    font-weight: 500;
 }
 
-#sidebar > div > svg{
-    width: 30px;
-    height: 30px;
-    fill: var(--tertiary-color);
+#sidebar > div:first-child > div{
+    display: flex;
+    align-items: center;
 }
 
-#sidebar > div > button{
+#sidebar #profilePic{
+  padding-top: 20px;
+  align-self: self-start;
+}
+
+#profilePic .picture{
+  background-color: var(--forth-color);
+  width: 35px;
+  height: 35px;
+  border-radius: 25px;
+  margin-right: 5px;
+  text-align: center;
+  color: #ffffff;
+}
+
+#projectPic .picture{
+  background-color: var(--forth-color);
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  margin-right: 5px;
+  text-align: center;
+  color: #ffffff;
+}
+#sidebar > div:first-child  svg{
+  width: 25px;
+  height: 25px;
+  fill: var(--tertiary-color);
+}
+
+#sidebar > div:first-child  button{
     background-color: var(--primary-color);
     cursor: pointer;
     border: none ;
@@ -118,10 +143,11 @@ body{
   text-decoration-thickness: 2px;
 }
 
-#myProjects > p{
-  font-size: 1.2rem;
-  margin-left: 25px;
-  margin-top: 100px;
+#myProjects > div{
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  margin-top: 40px;
   font-weight: 600;
 }
 

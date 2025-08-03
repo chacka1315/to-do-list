@@ -6,6 +6,10 @@ class Project {
         this.tasks = [];
     };
 
+    set tasksTab (NewTasksTab) {
+        this.tasks = NewTasksTab;
+    };
+
     addTask ( task ) {
         this.tasks.push( task );
     }
@@ -15,7 +19,7 @@ class Project {
     }
 
     static restoreProjectMethods (JSONproject) {
-    const project = Object.assign(new Project, JSONproject);
+    const project = Object.assign(new Project(), JSONproject);
     return project;
     };
 }

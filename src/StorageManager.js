@@ -12,11 +12,14 @@ function StorageManager() {
     const restoreMethods = (savedProjects) => {
         const savedProjectsRestored = savedProjects.map(project => {
             const restoredProject =  Project.restoreProjectMethods(project);
-            const restoredTasks =project.tasks.map(task => Task.restoreTaskMethods(task));
-            project.tasksTab = restoredTasks;
+            const restoredTasksTab = project.tasks.map(task => {
+                const restoredTask = Task.restoreTaskMethods(task);
+                restoredTask.detailsOpen = false;
+                return restoredTask
+            })
+            restoredProject.tasksTab = restoredTasksTab;
             return restoredProject;
         });
-        console.log(savedProjectsRestored);
         return savedProjectsRestored;
     };
 
@@ -28,8 +31,6 @@ function StorageManager() {
             savedProjects = JSON.parse(savedProjects);
             const savedProjectsRestored = restoreMethods(savedProjects);
             projectManager.projectsTab = savedProjectsRestored;
-            console.log(savedProjectsRestored)
-            console.log(projectManager.projects)
         } else{
             console.log("Any data here!");
             appDataInitialiazer();
@@ -53,7 +54,7 @@ function StorageManager() {
     };
 
  
-    return {updateStorage, getStorageData,}
+    return {updateStorage, getStorageData}
 }
 
 const storageManager = StorageManager();

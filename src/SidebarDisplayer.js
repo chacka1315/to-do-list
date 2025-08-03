@@ -4,6 +4,7 @@ import projectManager from "./ProjectManager";
 function SidebarDisplayer () {
     const myProjects = document.querySelector("#myProjects");
     const projectList = myProjects.querySelector("ul");
+    const addGeneralTaskBtn = document.querySelector("#addGeneralTaskBtn");
 
     const colorHashSymbol = () => {
         const r = Math.floor(Math.random()*256 );
@@ -14,14 +15,18 @@ function SidebarDisplayer () {
 
     const updateSidebar = () =>  {
         projectList.textContent = "";
-        projectManager.projects.forEach( project => {
+        projectManager.projects.forEach( (project, index) => {
+            if(index === 0) { // we don't want to display the the defaulte project like others
+                addGeneralTaskBtn.dataset.id = project.id;
+                return;
+            }; 
             const projectLine = document.createElement("li");
             const projectTitle = document.createElement("h2")
             const hashSpan = document.createElement("span");
             hashSpan.textContent = "#"
             hashSpan.style.color = colorHashSymbol();
             hashSpan.style.fontWeight = "bolder";
-            hashSpan.style.fontSize = "2rem"
+            hashSpan.style.fontSize = "1.5rem"
             projectTitle.dataset.id = project.id;
             projectTitle.textContent = project.title;
 

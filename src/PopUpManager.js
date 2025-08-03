@@ -38,9 +38,7 @@ function PopUpManager() {
         }
     }
     
-
     const addTaskPopUp = () => taskFormDialog.showModal();
-
 
     const cleanTaskPopUpField = () => {
         for (let i = 0; i < inputs.length; i++) {
@@ -150,7 +148,12 @@ function PopUpManager() {
                 if (project) {
                     editProjectPopUp(project);
                 }       
-            };
+        } else if (e.target.matches("button#addGeneralTaskBtn")) {
+            projectId = e.target.dataset.id;
+            confirmTaskMode = "add";
+            addTaskPopUp();
+            cleanTaskPopUpField();
+        };
     });
 
 
