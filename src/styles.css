@@ -1,4 +1,6 @@
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -17,90 +19,109 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-img, picture, video, canvas, svg {
+img,
+picture,
+video,
+canvas,
+svg {
   display: block;
   max-width: 100%;
 }
 
-input, button, textarea, select {
+input,
+button,
+textarea,
+select {
   font: inherit;
 }
 
-p, h1, h2, h3, h4, h5, h6 {
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   overflow-wrap: break-word;
 }
 
 p {
   text-wrap: pretty;
 }
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   text-wrap: balance;
 }
 
-#root, #__next {
+#root,
+#__next {
   isolation: isolate;
 }
 
-:root{
+:root {
   --primary-color: #fcfaf8;
   --secondary-color: #ffffff;
-  --tertiary-color : #199de4;
-  --forth-color : #de4d40; 
+  --tertiary-color: #199de4;
+  --forth-color: #de4d40;
 }
 
-body{
-    font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    font-size: 1.2rem;
+body {
+  font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, sans-serif;
+  font-size: 1.2rem;
 }
 
-#container{
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-  }
+#container {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
 
 /* sidebar styling */
 
-#sidebar{
-    display: flex;
-    flex-direction: column;
-    background-color: var(--primary-color);
-    height: 100vh;
-    position: sticky;
-    top: 0;
-    overflow:auto;
-    padding-left: 30px;
+#sidebar {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--primary-color);
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  overflow: auto;
+  padding-left: 30px;
 }
 
-#sidebar > div:first-child{
-    display: grid;
-    grid-template-rows: 80px repeat(4, 40px);
-    font-size: 1rem;
-    font-weight: 500;
+#sidebar > div:first-child {
+  display: grid;
+  grid-template-rows: 80px repeat(4, 40px);
+  font-size: 1rem;
+  font-weight: 500;
 }
 
-#sidebar > div:first-child > div{
-    display: flex;
-    align-items: center;
+#sidebar > div:first-child > div {
+  display: flex;
+  align-items: center;
 }
 
-#sidebar > div:first-child  select{
-    border: none;
-    color: var(--forth-color);
-    font-size: 16px;
-    font-weight: 500;
-    text-align: center;
+#sidebar > div:first-child select {
+  border: none;
+  color: var(--forth-color);
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
 }
 
-#sidebar > div:first-child  select:focus{
-    outline: none;
+#sidebar > div:first-child select:focus {
+  outline: none;
 }
 
-
-#sidebar #profilePic{
+#sidebar #profilePic {
   align-self: self-start;
 }
 
-#profilePic .picture{
+#profilePic .picture {
   width: 35px;
   height: 35px;
   border-radius: 25px;
@@ -113,31 +134,31 @@ body{
   font-size: 2.5rem;
 }
 
-#projectPic .picture{
+#projectPic .picture {
   width: 30px;
   height: 30px;
   border-radius: 5px;
   margin-right: 5px;
 }
 
-#sidebar > div:first-child  svg{
+#sidebar > div:first-child svg {
   width: 25px;
   height: 25px;
   fill: var(--tertiary-color);
 }
 
-#sidebar > div:first-child  button{
-    background-color: var(--primary-color);
-    cursor: pointer;
-    border: none ;
+#sidebar > div:first-child button {
+  background-color: var(--primary-color);
+  cursor: pointer;
+  border: none;
 }
 
-#myProjects svg{
+#myProjects svg {
   width: 25px;
-  height:25px;
+  height: 25px;
 }
 
-#myProjects li{
+#myProjects li {
   display: grid;
   grid-template-columns: 25px 1fr 25px 50px;
   font-size: 0.7rem;
@@ -145,18 +166,18 @@ body{
   margin-left: -30px;
 }
 
-#myProjects li h2{
+#myProjects li h2 {
   cursor: pointer;
 }
 
-#myProjects li h2:hover{
+#myProjects li h2:hover {
   cursor: pointer;
   text-decoration: underline;
   text-decoration-color: var(--forth-color);
   text-decoration-thickness: 2px;
 }
 
-#myProjects > div{
+#myProjects > div {
   display: flex;
   align-items: center;
   font-size: 1rem;
@@ -164,17 +185,17 @@ body{
   font-weight: 600;
 }
 
-.deleteProjectBtn svg{
+.deleteProjectBtn svg {
   fill: var(--forth-color);
   cursor: pointer;
 }
 
-.editProjectBtn svg{
+.editProjectBtn svg {
   fill: var(--tertiary-color);
   cursor: pointer;
 }
 
-#addProject{
+#addProject {
   margin-top: 10px;
   margin-left: 50px;
   fill: var(--tertiary-color);
@@ -185,62 +206,59 @@ body{
   cursor: pointer;
 }
 
-#addProject:hover{
+#addProject:hover {
   fill: rgba(25, 157, 228, 0.8);
 }
 
-#addProject:active{
+#addProject:active {
   transform: scale(0.95);
 }
 
-
-
 /* content styling */
-#content{
-    display: flex;
-    flex-direction: column;
-    padding-left: 50px;
-    width: 90%;
+#content {
+  display: flex;
+  flex-direction: column;
+  padding-left: 50px;
+  width: 90%;
 }
 
-#content h1{
-    font-size: 1.3rem;
+#content h1 {
+  font-size: 1.3rem;
 }
 
-#content h2{
-    font-size: 2rem;
+#content h2 {
+  font-size: 2rem;
 }
 
-#content > div{
-    margin-top: 20px;
+#content > div {
+  margin-top: 20px;
 }
 
-.divTask1{
-    border-bottom: 2px solid #f5f5f5;
-    display: grid;
-    grid-template-rows: 25px 25px;
+.divTask1 {
+  border-bottom: 2px solid #f5f5f5;
+  display: grid;
+  grid-template-rows: 25px 25px;
 }
 
-#content > div > div > div{
-    display: grid;
-    grid-template-columns: 15px 1fr 40px 40px;
-    column-gap: 15px;
+#content > div > div > div {
+  display: grid;
+  grid-template-columns: 15px 1fr 40px 40px;
+  column-gap: 15px;
 }
 
-#content input{
-    width: 1.2rem;
-    height: 1.2rem;
-    align-self: center;
-    appearance: none;
-    border: solid 2px #dad5d5;
-    border-radius: 5px;
-    color: var(--secondary-color);
-    position: relative;
-    display: inline-block;
-    
+#content input {
+  width: 1.2rem;
+  height: 1.2rem;
+  align-self: center;
+  appearance: none;
+  border: solid 2px #dad5d5;
+  border-radius: 5px;
+  color: var(--secondary-color);
+  position: relative;
+  display: inline-block;
 }
 
-#content input:checked{
+#content input:checked {
   background-color: var(--tertiary-color);
   border: none;
   transition: all 0.6s ease-out;
@@ -248,66 +266,65 @@ body{
 #content input::before {
   content: "✔";
   position: absolute;
-  font-size: 1rem ;
+  font-size: 1rem;
   right: 3px;
   top: -0.2em;
   visibility: hidden;
 }
 
-#content input:checked::before{
+#content input:checked::before {
   visibility: visible;
 }
 
-.dueDate1{
-    font-size: 16px;
-    display: grid;
-    grid-template-columns: 100px 100px;
-    margin-left: 30px;
-    color: green;
+.dueDate1 {
+  font-size: 16px;
+  display: grid;
+  grid-template-columns: 100px 100px;
+  margin-left: 30px;
+  color: green;
 }
 
-.dueDate1 svg{
-    width: 12px;
-    height: 12px;
-    fill: green;
+.dueDate1 svg {
+  width: 12px;
+  height: 12px;
+  fill: green;
 }
 
-.dueDate1 span{
-    display: flex;
-    align-items: center;
-    gap: 5px;
+.dueDate1 span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
-.dueDate1 span:last-child{
-    font-size: 14px;
+.dueDate1 span:last-child {
+  font-size: 14px;
 }
 
-button svg{
-    width: 20px;
-    height: 20px;
+button svg {
+  width: 20px;
+  height: 20px;
 }
 
-.deleteTaskBtn svg{
+.deleteTaskBtn svg {
   fill: var(--forth-color);
 }
 
-.taskDetailsBtn svg{
+.taskDetailsBtn svg {
   fill: var(--tertiary-color);
 }
 
-.detailsBtn svg{
+.detailsBtn svg {
   fill: var(--tertiary-color);
 }
 
 .deleteTaskBtn,
-.taskDetailsBtn{
+.taskDetailsBtn {
   background-color: var(--secondary-color);
   border: none;
   cursor: pointer;
 }
 
-
-.addTaskBtn{
+.addTaskBtn {
   background-color: var(--secondary-color);
   color: var(--forth-color);
   font-weight: 700;
@@ -318,23 +335,23 @@ button svg{
   transition: transform 0.3s ease;
 }
 
-.addTaskBtn:active{
+.addTaskBtn:active {
   transform: scale(0.95);
 }
 
 /* styling appearance of task details */
-.divTask2{
+.divTask2 {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: 50px 100px 50px 100px 50px;
 }
 
-.divTask2 > div{
+.divTask2 > div {
   grid-column: 1/-1;
   align-self: center;
 }
 
-.description{
+.description {
   grid-column: 1/6;
   grid-row: 2;
   border-radius: 10px;
@@ -344,7 +361,7 @@ button svg{
   height: fit-content;
 }
 
-.dueDate2{
+.dueDate2 {
   grid-column: 1;
   grid-row: 3;
   align-self: flex-start;
@@ -352,7 +369,7 @@ button svg{
   color: green;
 }
 
-.dueTime2{
+.dueTime2 {
   grid-column: 2;
   grid-row: 3;
   align-self: flex-start;
@@ -360,21 +377,21 @@ button svg{
   color: green;
 }
 
-.priority{
+.priority {
   grid-column: 3;
   grid-row: 3;
   align-self: flex-start;
   font-size: 16px;
 }
 
-.addDate{
+.addDate {
   grid-column: 4/6;
   grid-row: 3;
   align-self: flex-start;
   font-size: 16px;
 }
 
-.notes{
+.notes {
   grid-column: 1/6;
   grid-row: 4;
   background-color: #f5f5f5;
@@ -384,8 +401,7 @@ button svg{
   height: fit-content;
 }
 
-
-.divTask2 > button{
+.divTask2 > button {
   grid-column: 5;
   grid-row: 5;
   background-color: var(--tertiary-color);
@@ -399,66 +415,66 @@ button svg{
   align-self: center;
 }
 
-.completedTaskStyle{
+.completedTaskStyle {
   color: var(--tertiary-color);
+  text-decoration: line-through;
 }
-
 
 /* add task modal styling */
-#taskFormDialog{
-justify-self: center;
-align-self: center;
-width: clamp(200px, 45%, 600px);
-border: var(--tertiary-color) 1px solid;
-border-radius: 10px;
+#taskFormDialog {
+  justify-self: center;
+  align-self: center;
+  width: clamp(200px, 45%, 600px);
+  border: var(--tertiary-color) 1px solid;
+  border-radius: 10px;
 }
 
-#taskFormDialog form{
+#taskFormDialog form {
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
 
-#taskFormDialog input#title{
+#taskFormDialog input#title {
   height: 30px;
   border: none;
   border-bottom: var(--tertiary-color) 1px solid;
 }
 
-#taskFormDialog input#title:focus{
+#taskFormDialog input#title:focus {
   outline: none;
   border-bottom: var(--forth-color) 1px solid;
 }
 
-#taskFormDialog textarea{
+#taskFormDialog textarea {
   border: var(--tertiary-color) 1px solid;
   border-radius: 10px;
   padding-left: 5px;
   width: 90%;
 }
-#taskFormDialog textarea:focus{
+#taskFormDialog textarea:focus {
   outline: none;
   border: var(--forth-color) 1px solid;
 }
 
-#taskFormDialog select{
+#taskFormDialog select {
   border: none;
   color: var(--forth-color);
   margin-right: 10px;
   font-weight: 600;
 }
 
-#taskFormDialog select:focus{
-  outline: none
+#taskFormDialog select:focus {
+  outline: none;
 }
 
-#taskFormDialog select option{
+#taskFormDialog select option {
   font-size: 16px;
   font-weight: 500;
   color: black;
 }
 
-#taskFormDialog input#due_time{
+#taskFormDialog input#due_time {
   color: var(--forth-color);
   font-size: 16px;
   font-weight: 500;
@@ -467,7 +483,7 @@ border-radius: 10px;
   padding-left: 5px;
 }
 
-#taskFormDialog input#other_date{
+#taskFormDialog input#other_date {
   color: var(--forth-color);
   font-size: 16px;
   font-weight: 500;
@@ -476,12 +492,12 @@ border-radius: 10px;
   padding-left: 5px;
   width: 120px;
 }
-#taskFormDialog input#due_time:focus{
+#taskFormDialog input#due_time:focus {
   outline: none;
   border: var(--forth-color) 2px solid;
 }
 
-#taskFormDialog input#priority{
+#taskFormDialog input#priority {
   color: var(--forth-color);
   font-size: 20px;
   font-weight: 500;
@@ -491,21 +507,21 @@ border-radius: 10px;
   height: 15%;
 }
 
-#taskFormDialog input#priority::placeholder{
+#taskFormDialog input#priority::placeholder {
   font-size: 16px;
   font-weight: 400;
   color: rgb(182, 179, 179);
 }
-#taskFormDialog input#priority:focus{
+#taskFormDialog input#priority:focus {
   outline: none;
   border: var(--forth-color) 2px solid;
 }
 
-#taskFormDialog form div:last-child{
+#taskFormDialog form div:last-child {
   display: flex;
   justify-content: space-around;
 }
-#taskFormDialog button{
+#taskFormDialog button {
   color: var(--secondary-color);
   font-weight: 600;
   background-color: var(--forth-color);
@@ -515,13 +531,13 @@ border-radius: 10px;
   transition: transform 0.3s ease;
 }
 
-#taskFormDialog button:active{
+#taskFormDialog button:active {
   transform: scale(0.95);
-    box-shadow: 1px 1px 2px rgb(218, 212, 212);
+  box-shadow: 1px 1px 2px rgb(218, 212, 212);
 }
 
 /* add project modal styling */
-#projectFormDialog{
+#projectFormDialog {
   position: fixed;
   top: 25%;
   width: 23%;
@@ -530,13 +546,13 @@ border-radius: 10px;
   margin-left: 10px;
 }
 
-#projectFormDialog form{
+#projectFormDialog form {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-#projectFormDialog button{
+#projectFormDialog button {
   color: var(--secondary-color);
   font-weight: 600;
   background-color: var(--forth-color);
@@ -546,17 +562,17 @@ border-radius: 10px;
   transition: transform 0.3s ease;
 }
 
-#projectFormDialog button:active{
+#projectFormDialog button:active {
   transform: scale(0.95);
   box-shadow: 1px 1px 2px rgb(218, 212, 212);
 }
 
-#projectFormDialog input{
+#projectFormDialog input {
   border: none;
   border-bottom: 1px solid var(--tertiary-color);
 }
 
-#projectFormDialog input:focus{
+#projectFormDialog input:focus {
   outline: none;
   border-bottom: 2px solid var(--forth-color);
 }
